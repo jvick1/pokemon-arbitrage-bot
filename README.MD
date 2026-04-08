@@ -32,13 +32,21 @@ pokemon-arbitrage-bot/
 # Workflow
 
 Raw Listing Title 
+
         ↓ 
+
 Structured Parser (NLP) 
+
         ↓ 
+
 Multi-Query Search (PriceCharting) 
+
         ↓ 
+
 Weighted Scoring Engine 
+
         ↓ 
+
 Best Match Selection 
         ↓ 
 Price Comparison 
