@@ -28,27 +28,3 @@ pokemon-arbitrage-bot/
 ├── arbitrage_opportunities.csv   # Generated: profitable flips
 └── README.md
 ```
-
-# Workflow
-
-Raw Listing Title 
-
-        ↓ 
-
-Structured Parser (NLP) 
-
-        ↓ 
-
-Multi-Query Search (PriceCharting) 
-
-        ↓ 
-
-Weighted Scoring Engine 
-
-        ↓ 
-
-Best Match Selection 
-        ↓ 
-Price Comparison 
-        ↓ 
-Arbitrage Opportunity
