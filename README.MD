@@ -10,6 +10,7 @@ Automated Python bot that scrapes liquid Pokémon card (`config.py`) listings fr
 ```python run_bot.py```
 
 2. View dash:
+
 ```streamlit run dashboard.py```
 
 # Project Structure
@@ -30,4 +31,16 @@ pokemon-arbitrage-bot/
 
 # Workflow
 
-Raw Listing Title ↓ Structured Parser (NLP) ↓ Multi-Query Search (PriceCharting) ↓ Weighted Scoring Engine ↓ Best Match Selection ↓ Price Comparison ↓ Arbitrage Opportunity
+Raw Listing Title 
+        ↓ 
+Structured Parser (NLP) 
+        ↓ 
+Multi-Query Search (PriceCharting) 
+        ↓ 
+Weighted Scoring Engine 
+        ↓ 
+Best Match Selection 
+        ↓ 
+Price Comparison 
+        ↓ 
+Arbitrage Opportunity
