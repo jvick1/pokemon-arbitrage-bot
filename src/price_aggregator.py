@@ -58,16 +58,13 @@ class PriceAggregator:
                 pokemon = p
                 break
 
-        # Variation (expanded list + "radiant")
+        # Variation 
         variations = [
             "ex", "vmax", "v", "vstar", "gx", "holo", "reverse holo",
             "full art", "fullart", "radiant", "secret rare"
         ]
         variation = next((v for v in variations if v in t), None)
-
-        # === IMPROVED SET EXTRACTION ===
         set_name = None
-        # Best: everything AFTER the FULL grade (fixes the "0 Japanese..." bug)
         grade_match = re.search(r'(PSA|BGS|CGC|TAG)\s*\d+\.?\d*', title, re.IGNORECASE)
         if grade_match:
             pos = title.find(grade_match.group(0)) + len(grade_match.group(0))
@@ -86,7 +83,7 @@ class PriceAggregator:
         return {
             "raw": title,
             "pokemon": pokemon,
-            "card_number": card_number,          # now normalized (no leading zero)
+            "card_number": card_number,          # no leading zero
             "year": year,
             "variation": variation,
             "set": set_name
@@ -94,10 +91,12 @@ class PriceAggregator:
 
     def _detect_language(self, title: str) -> str:
         t = title.lower()
-        if any(x in t for x in ["japanese", "jp", "日本語"]):
+        if any(x in t for x in ["japanese", "jp"]):
             return "japanese"
-        elif any(x in t for x in ["chinese", "korean", "cn", "kr"]):
-            return "chinese/korean"
+        elif any(x in t for x in ["chinese", "cn"]):
+            return "korean"
+        elif any(x in t for x in ["korean", "kr"]):
+            return "korean"
         return "english"
 
     def _detect_grade(self, title: str) -> str:
@@ -115,14 +114,14 @@ class PriceAggregator:
         card = parsed["card_number"]
         var = parsed["variation"]
 
-        # Stage 1 — BEST query (exactly what you asked for)
+        # Stage 1 — BEST query
         if pokemon and card:
             base = f"{pokemon} #{card}"
             if var:
                 base = f"{var} {base}"
             queries.append(base)
 
-        # Stage 2 — with set (still useful fallback)
+        # Stage 2 — with set 
         if parsed["set"] and pokemon and card:
             queries.append(f"{pokemon} {parsed['set']} #{card}")
 
@@ -139,7 +138,7 @@ class PriceAggregator:
         return soup.find_all("tr", id=lambda x: x and x.startswith("product-"))
 
     # =========================
-    # PHASE 3 — SCORING ENGINE (unchanged — already solid)
+    # PHASE 3 — SCORING ENGINE 
     # =========================
     def _score_row(self, row, parsed: Dict, language: str) -> float:
         title_cell = row.find("td", class_="title")
@@ -198,9 +197,9 @@ class PriceAggregator:
 
         # Clean print exactly as you wanted
         card_display = f"#{parsed['card_number']}" if parsed["card_number"] else "None"
-        print(f"🔍 Parsed → Pokemon: {parsed['pokemon']} | {card_display} | "
-              f"Set: {parsed['set']} | Var: {parsed['variation']}")
-        print(f"   Grade: {grade} | Language: {language}")
+        print(f"Parsed → Pokemon: {parsed['pokemon']} | {card_display} | "
+              f"Set: {parsed['set']} | Var: {parsed['variation']}"
+              f"Grade: {grade} | Language: {language}")
 
         queries = self._build_queries(parsed)
 
