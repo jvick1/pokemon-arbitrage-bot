@@ -22,9 +22,9 @@ pokemon-arbitrage-bot/
 │   ├── config.py                 # Liquid Pokémon list + settings
 │   ├── price_aggregator.py       # PriceCharting scraper & matcher
 │   ├── analyzer.py               # Arbitrage logic
-│   ├── me_client.py              # Collector Crypto scraper
+│   ├── client.py                 # Collector card scraper
 │   └── init.py
-├── all_listings.csv              # Generated: all scraped cards
-├── arbitrage_opportunities.csv   # Generated: profitable flips
+├── all_listings.csv              # Output: all scraped cards
+├── arbitrage_opportunities.csv   # Output: profitable flips
 └── README.md
 ```
