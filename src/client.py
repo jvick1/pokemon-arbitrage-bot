@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options
 
 from .config import LIQUID_POKEMON, SOL_PRICE
 
-class MagicEdenClient:
+class Client:
     URL = "https://collectorcrypt.com/marketplace/cards"
     
     def __init__(self, headless: bool = False):
